@@ -1,0 +1,7 @@
+{
+  "name": "corte-3",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
