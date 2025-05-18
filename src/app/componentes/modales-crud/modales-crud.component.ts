@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { IonItem, IonLabel, IonButton, IonModal, IonContent, IonActionSheet, IonInput, IonHeader, IonToolbar, IonButtons, IonTitle, IonList, IonTextarea, ToastController, AlertController} from '@ionic/angular/standalone';
 import { borrarApi, editarApi } from 'src/app/interfaces/heroes.interface';
 import { HeroesService } from 'src/app/servicios/heroes.service';
@@ -17,6 +17,7 @@ export class ModalesCrudComponent  implements OnInit {
   @Input() casa:string = '';
   @Input() icono:string = '';
   @Input() aparicion:string = '';
+  @Output() eventReloadAPI = new EventEmitter<string>();
 
   respuestaApiEditar:editarApi = {Ok:false, msg:'', resp: {message: ''}};
   respuestaApiBorrar:borrarApi = {Ok:false, msg:'', resp: {message: ''}};
@@ -94,6 +95,7 @@ export class ModalesCrudComponent  implements OnInit {
     );
 
     if (this.respuestaApiBorrar.Ok) {
+      this.eventReloadAPI.emit('borrado');
       this.presentToast('Borrado de personaje exitoso.')
     }
     else {
@@ -122,6 +124,7 @@ export class ModalesCrudComponent  implements OnInit {
       );
 
       if (this.respuestaApiEditar.Ok) {
+        this.eventReloadAPI.emit('edicion');
         this.presentToast('Edición de personaje exitosa.')
       }
       else {

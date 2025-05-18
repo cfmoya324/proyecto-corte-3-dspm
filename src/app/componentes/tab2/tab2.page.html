@@ -24,12 +24,14 @@
         [icono]="heroe.img"
         [aparicion]="heroe.aparicion"
         [biografia]="heroe.bio"
-        (heroeBorrado)="recargarHeroes($event)" >
+        [imagenes]="multimediaHeroe[heroe._id]"
+        (eventReloadAPI)="recargarHeroes($event)" >
       </app-heroe>
     }
   </ion-list>
 
-  <app-modal-crear-heroe>
+  <app-modal-crear-heroe 
+    (eventReloadAPI)="recargarHeroes($event)" >
   </app-modal-crear-heroe>
 
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">

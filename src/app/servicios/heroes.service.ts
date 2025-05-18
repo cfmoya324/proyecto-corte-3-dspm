@@ -13,9 +13,11 @@ export class HeroesService {
 
 
   getHeroes():any {
-    return this.http.get(URL_HEROES).pipe(
+    let url = `${URL_HEROES}/heroes/`;
+
+    return this.http.get(url).pipe(
       map((data) => {
-        console.log('DATOS', data);
+        console.log('DATOS INICIALES HEROES', data);
         return data;
       })
     );
@@ -23,7 +25,7 @@ export class HeroesService {
 
 
   getOneHeroe(id:string):any {
-    let url = `${URL_HEROES}${id}`;
+    let url = `${URL_HEROES}/heroes/${id}`;
 
     return this.http.get(url, {}).pipe(
       map((data: any) => {
@@ -37,8 +39,8 @@ export class HeroesService {
   crudHeroes(unHeroe: heroe, unaAccion: 'eliminar' | 'insertar' | 'modificar'):any {
 
     if (unaAccion === 'eliminar') {
+      let url = `${URL_HEROES}/heroes/${unHeroe._id}`;
 
-      let url = `${URL_HEROES}${unHeroe._id}`;
       return this.http.delete(url).pipe(
         map((data) => {
           console.log(data);
@@ -48,6 +50,7 @@ export class HeroesService {
     }
 
     if (unaAccion === 'insertar') {
+      let url = `${URL_HEROES}/heroes/`;
 
       const body = {
         nombre:unHeroe.nombre,
@@ -57,7 +60,7 @@ export class HeroesService {
         casa:unHeroe.casa,
       };
 
-      return this.http.post(URL_HEROES, body).pipe(
+      return this.http.post(url, body).pipe(
         map((data) => {
           console.log('DATOS', data);
           return data;
@@ -65,7 +68,7 @@ export class HeroesService {
     }
 
     if (unaAccion === 'modificar') {
-      let url = `${URL_HEROES}${unHeroe._id}`;
+      let url = `${URL_HEROES}/heroes/${unHeroe._id}`;
 
       const body = {
         nombre:unHeroe.nombre,

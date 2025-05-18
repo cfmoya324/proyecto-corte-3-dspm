@@ -11,11 +11,22 @@
         <ion-card-title>{{nombre}}</ion-card-title>
         <ion-card-subtitle>{{casa}}</ion-card-subtitle>
         <ion-avatar>
-          <img alt="Foto del Heroe" src="{{icono}}" />
+          <img alt="Avatar del Heroe" src="{{icono}}" />
         </ion-avatar>
       </ion-card-header>
       <ion-card-content>
-        <ion-label>Su primera aparición fue en {{aparicion.slice(0,10)}}</ion-label>
+        <ion-label>Su primera aparición fue en <b>{{aparicion.slice(0,10)}}</b></ion-label>
+
+        <ion-grid>
+          <ion-row>
+            @for (imagen of imagenes; track imagen) {
+              <ion-col>
+                <img alt="Imagen" src="{{imagen}}" />
+              </ion-col>
+            }
+          </ion-row>
+        </ion-grid>
+
         <ion-button size="large" id="{{id + 'bio'}}" expand="block">Biografía</ion-button>
 
       </ion-card-content>
@@ -27,7 +38,8 @@
       [nombre]="nombre"
       [casa]="casa"
       [icono]="icono"
-      [aparicion]="aparicion">
+      [aparicion]="aparicion"
+      (eventReloadAPI)="recargarHeroes($event)" >
     </app-modales-crud>
 
   </ion-item>

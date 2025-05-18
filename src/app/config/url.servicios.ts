@@ -1,1 +1,1 @@
-export const URL_HEROES = "https://rest-sorella-production.up.railway.app/api/heroes/";
+export const URL_HEROES = "http://localhost:8081/api";

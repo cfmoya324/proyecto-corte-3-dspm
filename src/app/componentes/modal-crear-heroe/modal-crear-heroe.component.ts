@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { IonItem, IonButton, IonModal, IonInput, IonHeader, IonToolbar, IonButtons, IonTitle, IonContent, IonList, IonTextarea, ToastController, AlertController} from '@ionic/angular/standalone';
 import { heroesApi, insertarApi } from 'src/app/interfaces/heroes.interface';
 import { HeroesService } from 'src/app/servicios/heroes.service';
@@ -17,6 +17,7 @@ export class ModalCrearHeroeComponent  implements OnInit {
   casa:string = '';
   icono:string = '';
   aparicion:string = '';
+  @Output() eventReloadAPI = new EventEmitter<string>();
 
   respuestaApiCrear:insertarApi = {Ok:false, msg:'', resp: {message: ''}};
 
@@ -75,6 +76,7 @@ export class ModalCrearHeroeComponent  implements OnInit {
       );
 
       if (this.respuestaApiCrear.Ok) {
+        this.eventReloadAPI.emit('crear');
         this.presentToast('Creación de personaje exitosa.')
       }
       else {
